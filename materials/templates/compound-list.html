@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} All compounds {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/3.0.0/css/select.dataTables.css">
+<link rel="stylesheet" type="text/css" href="https://code.highcharts.com/css/highcharts.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.colVis.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/2.2.2/js/dataTables.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/select/3.0.0/js/dataTables.select.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/select/3.0.0/js/select.dataTables.js"></script>
+<script type="text/javascript" src="https://code.highcharts.com/highcharts.js"></script>
+
+<div  id="example2">
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+
+
+      <div class="d-block mb-4 mb-md-0">
+          <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
+            
+          </nav>
+          <h2 class="h4">All compounds</h2>
+      </div>
+          <div class="btn-toolbar mb-2 mb-md-0">
+              <a href="" class="btn btn-sm btn-primary">Add new compound</a>
+          </div>
+      </div>
+
+      <div id="demo-output" style="margin-bottom: 1em;" class="chart-display"></div>
+  <div class="container">
+
+    <form action="" method=POST>
+        {% csrf_token %}
+    <table class="table" id="example" style="position: relative;">
+
+        <thead>
+    <tr>
+       <th>comp_id</th>
+       <th>Fuel_type</th>
+       <th>zero_carbon_option</th>
+        <th>Fuel_type_rate</th>
+        <th>Zero_carbon_rate</th>
+        <th>green_premium_fuels</th>
+        <th>market</th>
+ 
+
+
+    </tr>
+</thead>
+         <tbody id="myTable">
+            <tr>
+                {% for object in object_list %}
+              <td>{{object.comp_id}}</td>
+              <td>{{object.Fuel_type}}</td>
+              <td>{{object.zero_carbon_option}}</td>
+          <th>{{ object.Fuel_type_rate}}</th>
+          <th>{{ object.Zero_carbon_rate}}</th>
+          <th>{{ object.green_premium_fuels}}</th>
+          <th>{{ object.market}}</th>
+  
+   
+            </tr>
+          {% endfor %}
+
+    </tbody>
+
+    </table>
+    </form>
+   <br> <hr>
+ <br>
+ </div>
+ <script>
+   $(document).ready( function () {
+	new DataTable('#example', {
+    search: {
+        return: true
+    }
+});
+   });
+ </script>
+ 
+    <!--style-- type="text/css">
+    section.compound-form {
+        width: 1100px;
+        margin: auto;
+        position: relative;
+    }
+    </style-->
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
