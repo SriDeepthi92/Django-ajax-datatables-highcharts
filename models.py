@@ -138,36 +138,3 @@ class MaterialsMaterial(models.Model):
     class Meta:
         managed = False
         db_table = 'materials_material'
-
-from django.db import connection
-
-with connection.cursor() as cursor:
-    cursor.execute("SHOW TABLES;")
-
-from django.db import connection
-
-def alter_table():
-    with connection.cursor() as cursor:
-        cursor.execute("ALTER TABLE django_admin_log DROP COLUMN content_type_id;")
-        print("Table successfully altered!")
-
-from django.db import connection
-
-def show_all_columns(table_name):
-    with connection.cursor() as cursor:
-        cursor.execute(f"PRAGMA table_info({table_name});")
-        columns = cursor.fetchall()
-        for column in columns:
-            print(column)
-
-from django.db import connection
-
-with connection.cursor() as cursor:
-    cursor.execute("DROP TABLE django_admin_log;")
-
-def show_all_tables():
-    with connection.cursor() as cursor:
-       cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
-       tables = cursor.fetchall()
-       for table in tables:
-        print(table[0])
